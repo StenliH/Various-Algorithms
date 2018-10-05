@@ -17,8 +17,8 @@ namespace VariousAlgorithms
             {
                 Stopwatch sw = new Stopwatch();
 
-                p.myArray = p.CreateRndArray(100, p.myArray.Length);
-                p.DisplayArray(p.myArray, sorted: false);
+                p.myArray = p.CreateRndArray(1000, p.myArray.Length);
+                //p.DisplayArray(p.myArray, showNumbers:true, writeLine:false);
 
                 sw.Start();
                 p.DisplayArray(p.BubbleSort(p.CopyArray(p.myArray), out p.name), p.name);
@@ -33,7 +33,7 @@ namespace VariousAlgorithms
                 sw.Reset();
 
                 sw.Start();
-                p.DisplayArray(p.InsertionSort(p.CopyArray(p.myArray), out p.name), p.name);
+                p.DisplayArray(p.InsertionSort(p.CopyArray(p.myArray), out p.name), p.name, showNumbers: true);
                 sw.Stop();
                 Console.WriteLine("Elapsed={0}", sw.Elapsed);
 

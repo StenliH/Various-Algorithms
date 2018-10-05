@@ -71,30 +71,23 @@ namespace VariousAlgorithms
         public int[] InsertionSort(int[] array, out string sortName)
         {
             sortName = "Insertion sort";
-            int[] sortedArray = new int[array.Length];
-            sortedArray[0] = array[0];
-            for (int i = 1; i < array.Length; i++)
+
+            int j = 0;
+
+            for (int i = 0; i < array.Length-1; i++)
             {
-                int position = 0;
-                for (int j = 0; j < i; j++)
+                j = i;
+                while (j > -1 && array[j + 1] < array[j])
                 {
-                    if (array[i] > sortedArray[j])
-                        position++;
-                    else
-                        break;
+                        int temp = array[j];
+                        array[j] = array[j+1];
+                        array[j+1] = temp;
+                        j--;
                 }
-                if (position == i)
-                    sortedArray[i] = array[i];
-                else
-                {
-                    for (int j = i; j > position; j--)
-                    {
-                        sortedArray[j] = sortedArray[j - 1];
-                    }
-                    sortedArray[position] = array[i];
-                }
+
             }
-            return sortedArray;
+
+            return array;
         }
 
         private void TimerHelper(int swaps, int comparisons)
@@ -103,24 +96,26 @@ namespace VariousAlgorithms
             //sorting method in order to compare them
         }
 
-        public void DisplayArray(int[] array, string name = "", bool sorted = true)
+        public void DisplayArray(int[] array, 
+                                string name = "Unsorted series of random numbers:",
+                                bool showNumbers = false, bool writeLine = true)
         {
-            if (sorted == false)
-                name = "Unsorted series of random numbers:";
-        
-            // Console.WriteLine("\n"); //remove
+            if (writeLine == true)
+                Console.WriteLine("\n");
 
             Console.WriteLine(name);
 
-            for (int i = 0; i < array.Length; i++)
+            if (showNumbers == true)
             {
-                if (i < (array.Length - 1))
-                    Console.Write($"{array[i]}, ");
-                else
-                    Console.Write($"{array[i]}");
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (i < (array.Length - 1))
+                        Console.Write($"{array[i]}, ");
+                    else
+                        Console.WriteLine($"{array[i]}");
+                }
 
             }
-            Console.WriteLine("\n");
         }
 
         public int[] CreateRndArray(int maxNum, int length = 10)
