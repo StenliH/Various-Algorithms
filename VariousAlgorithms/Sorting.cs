@@ -6,16 +6,25 @@ using System.Threading.Tasks;
 
 namespace VariousAlgorithms
 {
-    class Sorting
+    public class Sorting
     {
+
         public string name = "";
         public int[] myArray = new int[15];
+
+        public Sorting(int randomNumbersRange)
+        {
+            myArray = CreateRndArray(randomNumbersRange, myArray.Length);
+        }
 
         public int[] BubbleSort(int[] array, out string sortName)
         {
             sortName = "Bubble sort";
+
+            array = CopyOf(array);
             int temp = 0;
             bool sorted;
+
             for (int j = 0; j < array.Length; j++)
             {
                 sorted = true;
@@ -39,6 +48,7 @@ namespace VariousAlgorithms
         public int[] SelectionSort(int[] array, out string sortName)
         {
             sortName = "Selection sort";
+            array = CopyOf(array);
             int smaller = 0;
             int temp = 0;
             bool swap = false;
@@ -54,7 +64,6 @@ namespace VariousAlgorithms
                         swap = true;
                     }
                 }
-
                 if (swap)
                 {
                     temp = array[j];
@@ -62,7 +71,6 @@ namespace VariousAlgorithms
                     array[smaller] = temp;
                     swap = false;
                 }
-
             }
 
             return array;
@@ -71,7 +79,8 @@ namespace VariousAlgorithms
         public int[] InsertionSort(int[] array, out string sortName)
         {
             sortName = "Insertion sort";
-
+            array = CopyOf(array);
+            
             int j = 0;
 
             for (int i = 0; i < array.Length-1; i++)
@@ -128,7 +137,7 @@ namespace VariousAlgorithms
             return arrayOfRndInt;
         }
 
-        public int[] CopyArray(int[] array)
+        private int[] CopyOf(int[] array)
         {
             int[] copyOfArray = new int[array.Length];
             for (int i = 0; i < array.Length; i++)
@@ -139,9 +148,9 @@ namespace VariousAlgorithms
             return copyOfArray;
         }
 
-        public Random random = new Random();
+        private Random random = new Random();
 
-        public int RndNum(int maxNum)
+        private int RndNum(int maxNum)
         {
             return random.Next(maxNum);
         }
