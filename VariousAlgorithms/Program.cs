@@ -11,6 +11,22 @@ namespace VariousAlgorithms
     {
         static void Main(string[] args)
         {
+            CaesarCipher caesar = new CaesarCipher();
+            caesar.GetMessage();
+            caesar.GetCryptingKey();
+            caesar.EncryptWithCaesar();
+
+            caesar.PrintCryptedMessage();
+
+            Console.ReadKey();
+        }
+
+
+
+
+        /*
+            static void Main(string[] args)
+        {
             Sorting p = new Sorting(500);
 
             while (true)
@@ -45,5 +61,6 @@ namespace VariousAlgorithms
             }
 
         }
+        */
     }
 }
