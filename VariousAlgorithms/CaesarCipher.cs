@@ -9,19 +9,19 @@ namespace VariousAlgorithms
     class CaesarCipher
     {
         private string alphabet = "abcdefghijklmnopqrstuvwxyz";
-        public string DecryptedMessage { get; set; }
+        public string PlainMessage { get; set; }
         public int Key { get; set; }
         public string EncryptedMessage { get; set; }
 
         public void EncryptWithCaesar()
         {
-            char[] tempCrypted = new char[DecryptedMessage.Length];
+            char[] tempCrypted = new char[PlainMessage.Length];
             char letter;
             int index = 0;
 
-            for (int i = 0; i < DecryptedMessage.Length; i++)
+            for (int i = 0; i < PlainMessage.Length; i++)
             {
-                letter = DecryptedMessage[i];
+                letter = PlainMessage[i];
 
                 if (Char.IsLetter(letter))
                 {
@@ -32,16 +32,9 @@ namespace VariousAlgorithms
 
                     index = alphabet.IndexOf(letter);
 
-                    if ((index + Key) < alphabet.Length) //nemá tady být (alphabet.Length - 1)?
-                    {
-                        letter = alphabet[index + Key];
-                    }
-                    else
-                    {
-                        letter = alphabet[Key - (alphabet.Length - 1 - index) - 1];
-                    }
+                    letter = alphabet[(alphabet.Length + index + Key) % alphabet.Length];
 
-                    if (Char.IsUpper(DecryptedMessage[i]))
+                    if (Char.IsUpper(PlainMessage[i]))
                     {
                         tempCrypted[i] = Char.ToUpper(letter);
                     }
@@ -80,14 +73,7 @@ namespace VariousAlgorithms
 
                     index = alphabet.IndexOf(letter);
 
-                    if ((index - Key) >= 0)
-                    {
-                        letter = alphabet[index - Key];
-                    }
-                    else
-                    {
-                        letter = alphabet[alphabet.Length + (index - Key)];
-                    }
+                    letter = alphabet[(alphabet.Length + index - Key) % alphabet.Length];
 
                     if (Char.IsUpper(EncryptedMessage[i]))
                     {
@@ -106,14 +92,14 @@ namespace VariousAlgorithms
 
             }
 
-            DecryptedMessage = String.Concat(tempDecrypted);
+            PlainMessage = String.Concat(tempDecrypted);
         }
 
 
         public void GetMessageForEncrypting()
         {
             Console.WriteLine("Zadejte zprávu k zašifrování:");
-            DecryptedMessage = Console.ReadLine();
+            PlainMessage = Console.ReadLine();
         }
 
         public void GetMessageForDecrypting()
@@ -140,7 +126,7 @@ namespace VariousAlgorithms
         public void PrintDecryptedMessage()
         {
             Console.WriteLine("Rozšifrovaný text:");
-            Console.WriteLine(DecryptedMessage);
+            Console.WriteLine(PlainMessage);
         }
 
         public bool Menu()
