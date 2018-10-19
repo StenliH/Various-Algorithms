@@ -12,13 +12,12 @@ namespace VariousAlgorithms
         static void Main(string[] args)
         {
             CaesarCipher caesar = new CaesarCipher();
-            caesar.GetMessage();
-            caesar.GetCryptingKey();
-            caesar.EncryptWithCaesar();
 
-            caesar.PrintCryptedMessage();
+            while (caesar.Menu())
+            {
+                Console.ReadKey();
+            };
 
-            Console.ReadKey();
         }
 
 
